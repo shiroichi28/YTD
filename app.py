@@ -14,7 +14,7 @@ def home():
             url.check_availability()
         except:
             return render_template('error.html')
-        return render_template('download.html')
+        return render_template('download.html',url=url)
             
 
     return render_template('home.html')
@@ -25,9 +25,10 @@ def download_video():
              url=YouTube(session['link'])
              list=request.form.get('list')
              video=url.streams.get_by_itag(list)
-             video.streams_to_buffer(buffer)
+             video.stream_to_buffer(buffer)
              buffer.seek(0)
-             return send_file(buffer, as_attachment=True,download_name="video.mp4",mimetype="video.mp4")
+             return send_file(buffer, as_attachment=True,download_name="video.mp4",mimetype="video/mp4")
         return redirect(url_for('home'))
+
 if __name__=='__main__':
      app.run(debug=True)

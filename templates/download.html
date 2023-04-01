@@ -1,13 +1,15 @@
 {% extends 'layout.html' %}
 {% block content %}
-<h3 style="text-align:center">Download</h3>
+{{url.titile}}
+<h3 style="text-align:center" >{{url.titile}}</h3>
 <form action="{{url_for('download_video')}}" method="post">
-    <select name="list" id="">
+    <select name="list" >
         {% for i in url.streams.filter(progressive=True) %}
-        <option value="{{i.list}}">{{i.resolution}}</option>
+        <option value="{{i.itag}}">{{i.resolution}}</option>
         {% endfor %}
-    </select
-    <button type="submit">Download</button>
-</form>
+    </select>
+    <button type="submit">Submit</button>
+
+ </form>
 
 {% endblock %}
